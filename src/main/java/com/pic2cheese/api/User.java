@@ -7,17 +7,20 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @Table(name = "user")
 public class User {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "user_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    private String name;
     private int age;
 
     private String city;
@@ -26,5 +29,16 @@ public class User {
 
     private LocalDateTime joinDay;
 
+    public User() {
+    }
 
+   public User(Gender gender, String name, int age, String city, String street, String zipcode, LocalDateTime joinDay) {
+        this.gender = gender;
+        this.name = name;
+        this.age = age;
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+        this.joinDay = joinDay;
+    }
 }

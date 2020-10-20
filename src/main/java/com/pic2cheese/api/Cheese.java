@@ -1,6 +1,7 @@
 package com.pic2cheese.api;
 
 
+import com.pic2cheese.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,4 +26,21 @@ public class Cheese {
     private String content;
     private String country;
 
+    /**
+     * stock증가
+     */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * stock감소
+     */
+    public void removeStock(int quantity){
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity =restStock;
+    }
 }
