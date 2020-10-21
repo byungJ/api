@@ -37,9 +37,18 @@ public class CheeseController {
     }
 
     @DeleteMapping("/cheese/{cheeseNo}")
-    public ResponseEntity<Void> remove(@PathVariable("cheeseNo") Long cheeseNo) {
+    public ResponseEntity<Void> remove(@PathVariable("cheeseNo") Long cheeseNo) throws Exception {
         cheeseService.remove(cheeseNo);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/cheese/{cheeseNo}")
+    public ResponseEntity<Cheese> modify(@PathVariable("cheeseNO") Long cheeseNo,
+                                         @Validated Cheese cheese) throws Exception {
+        cheese.setId(cheeseNo);
+        cheeseService.modify(cheese);
+
+        return new ResponseEntity<>(cheese, HttpStatus.OK);
     }
 }

@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{userNo}")
-    public ResponseEntity<User> modity(@PathVariable("userNo") Long userNo,
+    public ResponseEntity<User> modify(@PathVariable("userNo") Long userNo,
                                        @Validated User user) throws Exception {
         user.setId(userNo);
         userService.modify(user);
