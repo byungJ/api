@@ -17,14 +17,21 @@ public class Cheese {
     private Long id;
 
     private String name;
-    private int price;
-    private int stockQuantity;
+    private String country;
+    private String matching;
 
-    private String taste;
+    private String texture;
+    private String types;
+
+    private String subcategory;
+    private int price;
 
     @Lob
     private String content;
-    private String country;
+
+    private int stockQuantity;
+    private String taste;
+
 
     /**
      * stock증가

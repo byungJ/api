@@ -25,8 +25,11 @@ public class UserRepository {
         return em.createQuery("select u from User u", User.class).getResultList();
     }
 
-    public List<User> finByName(String name) {
-        return em.createQuery("select u from User u where u.name= :name", User.class)
-                .setParameter("name",name).getResultList();
+    public List<User> finById(Long userNo) {
+        return em.createQuery("select u from User u where u.id= :userNo", User.class).getResultList();
+    }
+
+    public void deleteById(Long userNo) {
+        em.createQuery("delete from User u where u.id = :userNo", User.class);
     }
 }

@@ -20,6 +20,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    private String pw;
+    private String nickname;
+
     private String name;
     private int age;
 
@@ -28,17 +31,4 @@ public class User {
     private String zipcode;
 
     private LocalDateTime joinDay;
-
-    public User() {
-    }
-
-   public User(Gender gender, String name, int age, String city, String street, String zipcode, LocalDateTime joinDay) {
-        this.gender = gender;
-        this.name = name;
-        this.age = age;
-        this.city = city;
-        this.street = street;
-        this.zipcode = zipcode;
-        this.joinDay = joinDay;
-    }
 }

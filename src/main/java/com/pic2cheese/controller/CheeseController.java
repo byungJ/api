@@ -3,35 +3,43 @@ package com.pic2cheese.controller;
 import com.pic2cheese.api.Cheese;
 import com.pic2cheese.service.CheeseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequiredArgsConstructor
 public class CheeseController {
 
     private final CheeseService cheeseService;
 
-    @GetMapping("/cheese/new")
-    public String createForm(Model model) {
-        model.addAttribute("cheese", new Cheese());
-        return "/cheese/createCheeseForm";
+    @PostMapping("/cheese/new")
+    public ResponseEntity<Cheese> create(@Validated Cheese cheese) throws Exception {
+
+        cheeseService.register(cheese);
+
+        return new ResponseEntity<>(cheese, HttpStatus.OK);
     }
 
-    @PostMapping("/cheese/new")
-    public String create(Cheese cheese) {
-        Cheese cheese1 = new Cheese();
+    @GetMapping("/cheese/{cheeseNo}")
+    public ResponseEntity<Cheese> read(@PathVariable("cheeseNo") Long cheeseNo) {
+        Cheese cheese = cheeseService.findOne(cheeseNo);
 
-        cheese1.setName(cheese.getName());
-        cheese1.setPrice(cheese.getPrice());
-        cheese1.setStockQuantity(cheese.getStockQuantity());
-        cheese1.setContent(cheese.getContent());
-        cheese1.setCountry(cheese.getCountry());
-        cheese1.setTaste(cheese.getTaste());
+        return new ResponseEntity<>(cheese, HttpStatus.OK);
+    }
 
-        cheeseService.saveCheese(cheese);
-        return "cheese:/";
+    @GetMapping("/cheese/list")
+    public ResponseEntity<List<Cheese>> list() throws Exception {
+        return new ResponseEntity<>(cheeseService.list(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/cheese/{cheeseNo}")
+    public ResponseEntity<Void> remove(@PathVariable("cheeseNo") Long cheeseNo) {
+        cheeseService.remove(cheeseNo);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

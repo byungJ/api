@@ -14,11 +14,7 @@ public class CheeseRepository {
     private final EntityManager em;
 
     public void save(Cheese cheese) {
-        if (cheese.getId() == null) {
-            em.persist(cheese);
-        } else {
-            em.merge(cheese);
-        }
+        em.persist(cheese);
     }
 
     public Cheese findOne(Long id) {
@@ -27,6 +23,10 @@ public class CheeseRepository {
 
     public List<Cheese> findAll() {
         return em.createQuery("select c from Cheese c", Cheese.class).getResultList();
+    }
+
+    public void deleteById(Long cheeseNo) {
+        em.createQuery("delete from Cheese c where c.id = :cheeseNo", Cheese.class);
     }
 
 }
