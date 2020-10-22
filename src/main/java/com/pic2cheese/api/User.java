@@ -30,9 +30,5 @@ public class User {
     private String street;
     private String zipcode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscription_id")
-    private Subscription subscription;
-
     private LocalDateTime joinDay;
 }
