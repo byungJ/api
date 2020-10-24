@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -31,6 +33,15 @@ public class Cheese {
 
     private int stockQuantity;
     private String taste;
+
+    @OneToMany(mappedBy = "cheese")
+    private List<UserCheese> userCheeses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cheese")
+    private List<Recamm> recamms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cheese")
+    private List<Review> reviews = new ArrayList<>();
 
 
     /**

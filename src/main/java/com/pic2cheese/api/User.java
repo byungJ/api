@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,4 +33,16 @@ public class User {
     private String zipcode;
 
     private LocalDateTime joinDay;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserCheese> userCheeses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<FnQ> fnQS = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Recamm> recamms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Review> reviews = new ArrayList<>();
 }
